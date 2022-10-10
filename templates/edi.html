@@ -1,0 +1,250 @@
+{% extends "test.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="inside-container" style="padding-top: 20px;">
+        <form class="row g-3 needs-validation" method="post" action="." novalidate>{% csrf_token %}
+            <div class="d-flex justify-content-start">
+                <div class="input-width">
+                    <div class="input-group  has-validation">
+                        <span class="input-group-text" id="environment">Environment</span>
+                        <select class="form-select" name="environment" aria-label="Default select example"
+                                placeholder="Select" required>
+                            <option disabled selected value="">Select Environment</option>
+                            {% for name in env_names %}
+                            <option value={{name.value}}>{{name.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select an Environment.
+                        </div>
+                    </div>
+                </div>
+                {% block multiple %}
+                {%endblock %}
+            </div>
+
+            <div class="d-flex justify-content-start">
+                <div class="input-width">
+                    <div class="input-group  has-validation">
+                        <span class="input-group-text" id="claim">Claim#</span>
+                        <input type="number" name="claim" class="form-control" aria-label="Sizing example input"
+                               aria-describedby="inputGroupPrepend" required>
+                        <div class="invalid-feedback">
+                            Please provide Claim number
+                        </div>
+                    </div>
+                </div>
+                <div class="input-width">
+                    <div class="input-group has-validation">
+                        <span class="input-group-text" id="customer">Customer#</span>
+                        <input type="number" class="form-control" id="validationCustomUsername" name="customer"
+                               aria-describedby="inputGroupPrepend" required>
+                        <div class="invalid-feedback">
+                            Please provide Customer number
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-start">
+                <div class="input-width">
+                    <div class="input-group  has-validation">
+                        <span class="input-group-text" id="start-date">Service Start Date</span>
+                        <input type="date" name="start-date" class="form-control" aria-label="Sizing example input"
+                               aria-describedby="inputGroupPrepend" required>
+                        <div class="invalid-feedback">
+                            Please provide Service start date
+                        </div>
+                    </div>
+                </div>
+                <div class="input-width">
+                    <div class="input-group  has-validation">
+                        <span class="input-group-text" id="end-date">Service End Date</span>
+                        <input type="date" name="end-date" class="form-control" aria-label="Sizing example input"
+                               aria-describedby="inputGroupPrepend">
+                        <div class="invalid-feedback">
+                            Please provide Service start date
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-evenly">
+                <div class="input-width">
+                    <div class="input-group  has-validation">
+                        <span class="input-group-text" id="total-amount">Total Amount</span>
+                        <input type="number" name="total-amount" class="form-control" aria-label="Sizing example input"
+                               aria-describedby="inputGroup-sizing-default" required>
+                        <div class="invalid-feedback">
+                            Please provide Total Amount
+                        </div>
+                    </div>
+                </div>
+                <div class="input-width">
+                    <div class="input-group  has-validation">
+                        <span class="input-group-text" id="submitted-amount">Submitted Amount</span>
+                        <input type="number" name="submitted-amount" class="form-control"
+                               aria-label="Sizing example input"
+                               aria-describedby="inputGroup-sizing-default" required>
+                        <div class="invalid-feedback">
+                            Please provide Submitted Amount
+                        </div>
+                    </div>
+                </div>
+                <div class="input-width">
+                    <div class="input-group  has-validation">
+                        <span class="input-group-text" id="approved-amount">Approved Amount</span>
+                        <input type="number" name="approved-amount" class="form-control" aria-label="Sizing example input"
+                               aria-describedby="inputGroup-sizing-default" required>
+                        <div class="invalid-feedback">
+                            Please provide Approved Amount
+                        </div>
+                    </div>
+                </div>
+                {% block eob %}
+                {%endblock %}
+            </div>
+            <div class="d-grid gap-2 col-6 mx-auto" style="margin-top: 30px;">
+                <button type="submit" class="btn btn-primary" id="create_edi">Create EDI bill</button>
+            </div>
+            {% if not message %}
+            <div class="d-flex justify-content-center message_hide" style="margin-top:0px">
+                <div class="justify-content-center">
+                    <div class="message" style="color:blue;font-weight:bold">
+                        {{message}}
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            {% if 'error' in message %}
+            <div class="d-flex justify-content-center message_hide" style="margin-top:50px">
+                <div class="justify-content-center">
+                    <div class="message" style="color:red;font-weight:bold">
+                        {{message}}
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="d-flex justify-content-center message_hide" style="margin-top:50px">
+                <div class="justify-content-center">
+                    <div class="message" style="color:blue;font-weight:bold">
+                        {{message}}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endif %}
+
+            <div class="d-flex justify-content-center" style="margin-top:50px">
+                <div class="justify-content-center loading2">
+                    <div class="spinner-border text-primary" role="status">
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <div class="justify-content-center loading2">
+                    <div class="justify-content-center">
+                        <div class="" id="changeText" style="color:blue;font-weight:bold">Fetching Details</div>
+                    </div>
+                </div>
+            </div>
+
+            <!--<text>Bill Interface:</text>-->
+            <!--{% if not bill_interface %}-->
+            <!--<textarea class="output_query_box_empty" name="query" aria-label="With textarea" disabled readonly>{{bill_interface}}</textarea>-->
+            <!--{% else %}-->
+            <!--<textarea class="output_query_box" name="query" aria-label="With textarea" disabled readonly>{{bill_interface}}</textarea>-->
+            <!--{% endif %}-->
+
+            <!--<text>Bill Interface Line item:</text>-->
+            <!--{% if not line_item %}-->
+            <!--<textarea class="output_query_box_empty" name="query" aria-label="With textarea" disabled readonly>{{line_item}}</textarea>-->
+            <!--{% else %}-->
+            <!--<textarea class="output_query_box" name="query" aria-label="With textarea" disabled-->
+            <!--readonly>{{line_item}}</textarea>-->
+            <!--{% endif %}-->
+            <!--<text>Bill Interface Customer:</text>-->
+            <!--{% if not customer %}-->
+            <!--<textarea class="output_query_box_empty" name="query" aria-label="With textarea" disabled readonly>{{customer}}</textarea>-->
+            <!--{% else %}-->
+            <!--<textarea class="output_query_box" name="query" aria-label="With textarea" disabled-->
+            <!--readonly>{{customer}}</textarea>-->
+            <!--{% endif %}-->
+            <!--<div class="col-12">-->
+            <!--<button type="submit" class="btn btn-primary">Execute</button>-->
+            <!--</div>-->
+        </form>
+        <!-- JavaScript for disabling form submissions if there are invalid fields -->
+        <script>
+        // Self-executing functio
+        var text = ["Generating Queries", "Inserting Bill","Fetching Details"];
+        var color=['blue','green', 'purple'];
+        var counter = 0;
+        var elem = document.getElementById("changeText");
+        var button = document.getElementById("create_edi");
+        //button.onclick = function() {loading_function()};
+
+        function loading_function() {
+          var inst = setInterval(change, 1000);
+        }
+        function change() {
+          elem.style.color = color[counter];
+          elem.innerHTML = text[counter];
+          counter++;
+          if (counter >= text.length) {
+            counter = 0;
+            // clearInterval(inst); // uncomment this if you want to stop refreshing after one cycle
+          }
+        }
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        var message = document.getElementsByClassName('message');
+                        var message_hide = document.getElementsByClassName('message_hide');
+                            for(var i=0;i<message.length;i++)
+                            {
+                                message[i].innerHTML = "";
+                            }
+                            for(var i=0;i<message_hide.length;i++)
+                            {
+                                message_hide[i].style.marginTop = '0px';
+                            }
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+
+                        }else{
+                            var spinner = document.getElementsByClassName('loading2');
+                            //spinner.style.display = 'block';
+                            for(var i=0;i<spinner.length;i++)
+                            {
+                                spinner[i].style.display = 'block';
+                            }
+                            loading_function();
+                            }
+                        form.classList.add('was-validated');
+
+                    }, false);
+                });
+
+            }, false);
+        })();
+
+
+
+
+
+
+
+
+
+
+        </script>
+    </div>
+</div>
+{%endblock %}

@@ -1,0 +1,14 @@
+{% extends "multiple_edi.html" %}
+
+{% block eob %}
+<div class="input-width">
+    <div class="input-group  has-validation">
+        <span class="input-group-text" id="eob-amount">EOB Amount</span>
+        <input type="text" name="eob-amount" class="form-control" aria-label="Sizing example input"
+               aria-describedby="inputGroup-sizing-default" required>
+        <div class="invalid-feedback">
+            Please provide EOB Amount
+        </div>
+    </div>
+</div>
+{%endblock %}

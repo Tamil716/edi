@@ -1,0 +1,78 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+    <title>DB Connect</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body class="m-0 border-0">
+
+<!-- Example Code -->
+<nav class="navbar sticky-top navbar-expand-lg bg_navbar">
+    <div class="container-fluid">
+        <a class="navbar_color applink_hover" href="/Home/">DBConnect</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="nav_list">
+                <li class="nav-item">
+                    <a class="navbar_link link_hover active_link" aria-current="page" href="/Home/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="navbar_link link_hover" href="/EDI/">EDI</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="navbar_link dropdown-toggle link_hover" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        Multiple EDI
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item sublink_hover" href="/Multiple-EDI/">Multiple EDI bills</a></li>
+                        <li><a class="dropdown-item sublink_hover" href="/Multiple-EDI-EOB/">Multiple EDI with EOB</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item sublink_hover" href="/Multiple-Line-Item/">Single EDI with Multiple
+                            Line items</a></li>
+                        <li><a class="dropdown-item sublink_hover" href="/Multiple-Line-Item-EOB/">Single EDI with
+                            Multiple Line items and EOB</a></li>
+                    </ul>
+                </li>
+                <!--<li class="nav-item">-->
+                <!--<a class="nav-link disabled">Disabled</a>-->
+                <!--</li>-->
+            </ul>
+            <!--<form class="d-flex" role="search">-->
+            <!--<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
+            <!--<button class="btn btn-outline-success" type="submit">Search</button>-->
+            <!--</form>-->
+        </div>
+    </div>
+</nav>
+<div class="d-flex justify-content-center">
+    <div class="title" style="">{{title}}</div>
+</div>
+{% block content %}
+{%endblock %}
+<!-- End Example Code -->
+<script>
+    var header = document.getElementById("nav_list");
+    var btns = header.getElementsByClassName("navbar_link");
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener("click", function() {
+      var current = document.getElementsByClassName("active_link");
+      current[0].className = current[0].className.replace(" active_link", "");
+      this.className += " active_link";
+      });
+    }
+
+</script>
+</body>
+</html>

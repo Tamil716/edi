@@ -1,0 +1,27 @@
+{% extends "test.html" %}
+
+{% block content %}
+	<div class="container">
+	<div class="upload_box">
+	  <div class="flex-child">
+		  <div class="text">Please upload the test case file to review</div>
+		  </div>
+	  <div class="flex-child">
+		  <input type="text" id="upload_text" class="upload_txt" placeholder='Please upload the test case';>
+		  <input type="file" id="upload" hidden />
+		  <label for="upload" class='upload_btn'>Choose File</label>
+	  </div>
+    </div>
+	<div class="child">
+		<button id='submit' class="review" type="submit">Review Test Case</button>
+	</div>
+	<div class="child">
+		<a id="link" download></a>
+		<div class="loader" id="loader">
+			<div class="loading">
+			</div>
+		</div>
+	</div>
+	</div>
+
+{%endblock %}

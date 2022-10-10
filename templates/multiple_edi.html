@@ -1,0 +1,14 @@
+{% extends "edi.html" %}
+
+{% block multiple %}
+<div class="input-width">
+    <div class="input-group  has-validation">
+        <span class="input-group-text" id="count">{{no_of_bills}}</span>
+        <input type="number" name="count" class="form-control" aria-label="Sizing example input"
+               aria-describedby="inputGroupPrepend" required>
+        <div class="invalid-feedback">
+            Please provide {{no_of_bills}}
+        </div>
+    </div>
+</div>
+{%endblock %}
