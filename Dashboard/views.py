@@ -132,6 +132,7 @@ def multiple_edi(request):
     if claim!=None and claim!='':
         queries=query.generate_multiple_edi(data,obj)
     if len(queries)!=0:
+        print(queries)
         if "successfully" in queries[0]:
             message=data.get('count')+" EDI Bill(s) inserted successfully  in DB "+str(queries[0]);
         else:

@@ -8,7 +8,7 @@ urlpatterns = [
     path('blog/<int:id>/edit', views.blog_update),
     path('blog/<int:id>/delete', views.blog_delete),
     path('blog-create/', views.blog_create),
-    path('Home/',views.about),
+    path('',views.about),
     path('EDI/',views.edi),
     path('Multiple-EDI/',views.multiple_edi),
     path('Multiple-EDI-EOB/',views.multiple_edi_eob),
