@@ -1,6 +1,6 @@
 import cx_Oracle
 
-#cx_Oracle.init_oracle_client(lib_dir=r"D:\oracle\instantclient\instantclient_21_7")
+cx_Oracle.init_oracle_client(lib_dir=r"D:\oracle\instantclient\instantclient_21_7")
 
 
 def connect(config):
